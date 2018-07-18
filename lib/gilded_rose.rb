@@ -10,23 +10,17 @@ class GildedRose
     @items.each do |item|
       unless name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
         if quality_is_greater_than?(0, item)
-          unless name_is?("Sulfuras, Hand of Ragnaros", item)
-            decrease_quality(item)
-          end
+          decrease_quality(item) unless name_is?("Sulfuras, Hand of Ragnaros", item)
         end
       else
-        if item.quality < 50
+        if quality_is_less_than?(50, item)
           increase_quality(item)
           if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
             if item.sell_in < 11
-              if item.quality < 50
-                increase_quality(item)
-              end
+              increase_quality(item) if quality_is_less_than?(50, item)
             end
             if item.sell_in < 6
-              if item.quality < 50
-                increase_quality(item)
-              end
+              increase_quality(item) if quality_is_less_than?(50, item)
             end
           end
         end
@@ -37,18 +31,14 @@ class GildedRose
       if item.sell_in < 0
         unless name_is?("Aged Brie", item)
           unless name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-            if item.quality > 0
-              unless name_is?("Sulfuras, Hand of Ragnaros", item)
-                decrease_quality(item)
-              end
+            if quality_is_greater_than?(0, item)
+              decrease_quality(item) unless name_is?("Sulfuras, Hand of Ragnaros", item)
             end
           else
             item.quality = item.quality - item.quality
           end
         else
-          if item.quality < 50
-            increase_quality(item)
-          end
+          increase_quality(item) if item.quality < 50
         end
       end
     end
