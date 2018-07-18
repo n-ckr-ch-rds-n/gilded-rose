@@ -19,13 +19,18 @@ class GildedRose
         unless name_is?("Aged Brie", item)
           unless name_is?("Backstage passes to a TAFKAL80ETC concert", item)
             decrease_item_quality(item)
-          else
-            decrease_quality_by(item.quality, item)
           end
+          set_quality_to_zero_for_out_of_date_backstage_passes(item)
         else
           increase_item_quality(item)
         end
       end
+    end
+  end
+
+  def set_quality_to_zero_for_out_of_date_backstage_passes(item)
+    if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+      decrease_quality_by(item.quality, item)
     end
   end
 

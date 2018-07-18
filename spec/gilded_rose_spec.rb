@@ -155,4 +155,11 @@ describe GildedRose do
     end
   end
 
+  describe '#set_quality_to_zero_for_out_of_date_backstage_passes' do
+    it 'backstage pass quality is set to zero when out of date' do
+      @gildedrose.set_quality_to_zero_for_out_of_date_backstage_passes(@backstagepass)
+      expect(@backstagepass.quality).to eq(0)
+    end
+  end
+
 end
