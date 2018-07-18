@@ -85,4 +85,10 @@ describe GildedRose do
     end
   end
 
+  describe '#name_is?' do
+    it 'checks item name' do
+      expect(@gildedrose.name_is?(@smarties, "Smarties")).to eq true
+    end
+  end
+
 end
