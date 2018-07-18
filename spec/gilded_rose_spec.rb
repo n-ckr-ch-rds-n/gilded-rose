@@ -2,18 +2,18 @@ require 'gilded_rose.rb'
 
 describe GildedRose do
 
+  before(:each) do
+    @smarties = Item.new("Smarties", 5, 20)
+    @custard = Item.new("Custard", 0, 10)
+    @agedbrie = Item.new("Aged Brie", 10, 30)
+    @agedbrie2 = Item.new("Aged Brie", 10, 50)
+    @sulfuras = Item.new("Sulfuras, Hand of Ragnaros", 10, 50)
+    @backstagepass = Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 10)
+
+    @gildedrose = GildedRose.new([@smarties, @custard, @agedbrie, @agedbrie2, @sulfuras, @backstagepass])
+  end
+
   describe '#update_quality' do
-
-    before(:each) do
-      @smarties = Item.new("Smarties", 5, 20)
-      @custard = Item.new("Custard", 0, 10)
-      @agedbrie = Item.new("Aged Brie", 10, 30)
-      @agedbrie2 = Item.new("Aged Brie", 10, 50)
-      @sulfuras = Item.new("Sulfuras, Hand of Ragnaros", 10, 50)
-      @backstagepass = Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 10)
-
-      @gildedrose = GildedRose.new([@smarties, @custard, @agedbrie, @agedbrie2, @sulfuras, @backstagepass])
-    end
 
     it 'decreases the quality of smarties' do
       @gildedrose.update_quality
@@ -70,4 +70,19 @@ describe GildedRose do
     end
 
   end
+
+  describe '#increase_quality' do
+    it 'increases quality by 1' do
+      @gildedrose.increase_quality(@smarties)
+      expect(@smarties.quality).to eq(21)
+    end
+  end
+
+  describe '#decrease_quality' do
+    it 'decreases quality by 1' do
+      @gildedrose.decrease_quality(@smarties)
+      expect(@smarties.quality).to eq(19)
+    end
+  end
+
 end
