@@ -116,4 +116,35 @@ describe GildedRose do
     end
   end
 
+  describe '#decrease_item_quality' do
+    it 'reduces the quality of non-sulfuras items' do
+      @gildedrose.decrease_item_quality(@smarties)
+      expect(@smarties.quality).to eq(19)
+    end
+
+    it 'does not reduce the quality of sulfuras' do
+      @gildedrose.decrease_item_quality(@sulfuras)
+      expect(@sulfuras.quality).to eq(50)
+    end
+  end
+
+  describe '#increase_item_quality' do
+    it 'reduces the quality of items whose quality is lower than 50' do
+      @gildedrose.increase_item_quality(@agedbrie)
+      expect(@agedbrie.quality).to eq(31)
+    end
+  end
+
+  describe '#decrease_item_sell_in' do
+    it 'reduces sell_in of non-sulfuras items' do
+      @gildedrose.decrease_item_sell_in(@smarties)
+      expect(@smarties.sell_in).to eq(4)
+    end
+
+    it 'does not reduce the sell_in of sulfuras' do
+      @gildedrose.decrease_item_sell_in(@sulfuras)
+      expect(@sulfuras.sell_in).to eq(10)
+    end
+  end
+
 end
