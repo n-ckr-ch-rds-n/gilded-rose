@@ -169,4 +169,18 @@ describe GildedRose do
     end
   end
 
+  describe '#manage_quality_for_out_of_date_items' do
+    it 'decreases quality for out of date normal items' do
+      @gildedrose.update_quality
+      @gildedrose.manage_quality_for_out_of_date_items(@custard)
+      expect(@custard.quality).to eq(7)
+    end
+
+    it 'increases quality for out of date brie' do
+      10.times { @gildedrose.update_quality }
+      @gildedrose.manage_quality_for_out_of_date_items(@agedbrie)
+      expect(@agedbrie.quality).to eq(40)
+    end
+  end
+
 end

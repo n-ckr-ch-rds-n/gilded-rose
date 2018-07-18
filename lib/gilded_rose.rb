@@ -15,13 +15,19 @@ class GildedRose
         apply_extra_quality_increases_to_backstage_passes(item)
       end
       decrease_item_sell_in(item)
-      if sell_in_is_less_than?(0, item)
-        unless name_is?("Aged Brie", item)
-          decrease_quality_for_out_of_date_items(item)
-          set_quality_to_zero_for_out_of_date_backstage_passes(item)
-        else
-          increase_item_quality(item)
-        end
+      manage_quality_for_out_of_date_items(item)
+    end
+  end
+
+  
+
+  def manage_quality_for_out_of_date_items(item)
+    if sell_in_is_less_than?(0, item)
+      unless name_is?("Aged Brie", item)
+        decrease_quality_for_out_of_date_items(item)
+        set_quality_to_zero_for_out_of_date_backstage_passes(item)
+      else
+        increase_item_quality(item)
       end
     end
   end
