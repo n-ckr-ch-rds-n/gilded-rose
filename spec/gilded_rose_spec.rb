@@ -147,4 +147,12 @@ describe GildedRose do
     end
   end
 
+  describe '#apply_extra_quality_increases_to_backstage_passes' do
+    it 'applies an extra quality increase when the concert is 10 days away' do
+      5.times { @gildedrose.update_quality }
+      @gildedrose.apply_extra_quality_increases_to_backstage_passes(@backstagepass)
+      expect(@backstagepass.quality).to eq(16)
+    end
+  end
+
 end

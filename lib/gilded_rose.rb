@@ -12,14 +12,7 @@ class GildedRose
         decrease_item_quality(item)
       else
         increase_item_quality(item)
-        if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-          if sell_in_is_less_than?(11, item)
-            increase_item_quality(item)
-          end
-          if sell_in_is_less_than?(6, item)
-            increase_item_quality(item)
-          end
-        end
+        apply_extra_quality_increases_to_backstage_passes(item)
       end
       decrease_item_sell_in(item)
       if sell_in_is_less_than?(0, item)
@@ -32,6 +25,17 @@ class GildedRose
         else
           increase_item_quality(item)
         end
+      end
+    end
+  end
+
+  def apply_extra_quality_increases_to_backstage_passes(item)
+    if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+      if sell_in_is_less_than?(11, item)
+        increase_item_quality(item)
+      end
+      if sell_in_is_less_than?(6, item)
+        increase_item_quality(item)
       end
     end
   end
