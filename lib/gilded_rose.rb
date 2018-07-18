@@ -8,9 +8,8 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      unless name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-        decrease_item_quality(item)
-      else
+      decrease_quality_of_normal_items(item)
+      if name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
         increase_item_quality(item)
         apply_extra_quality_increases_to_backstage_passes(item)
       end
@@ -19,7 +18,18 @@ class GildedRose
     end
   end
 
-  
+  def increase_quality_of_special_items(item)
+    if name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+      increase_item_quality(item)
+      apply_extra_quality_increases_to_backstage_passes(item)
+    end
+  end
+
+  def decrease_quality_of_normal_items(item)
+    unless name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+      decrease_item_quality(item)
+    end
+  end
 
   def manage_quality_for_out_of_date_items(item)
     if sell_in_is_less_than?(0, item)

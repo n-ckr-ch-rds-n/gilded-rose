@@ -183,4 +183,32 @@ describe GildedRose do
     end
   end
 
+  describe '#decrease_quality_of_normal_items' do
+
+    it 'decreases the quality of normal items' do
+      @gildedrose.decrease_quality_of_normal_items(@smarties)
+      expect(@smarties.quality).to eq(19)
+    end
+
+    it 'does not decrease the quality of aged brie' do
+      @gildedrose.decrease_quality_of_normal_items(@agedbrie)
+      expect(@agedbrie.quality).to eq(30)
+    end
+
+  end
+
+  describe '#increase_quality_of_special_items' do
+
+    it 'increases the quality of aged brie and backstage passes' do
+      @gildedrose.increase_quality_of_special_items(@agedbrie)
+      expect(@agedbrie.quality).to eq(31)
+    end
+
+    it 'does not increase the quality of smarties' do
+      @gildedrose.increase_quality_of_special_items(@smarties)
+      expect(@smarties.quality).to eq(20)
+    end
+
+  end
+
 end
