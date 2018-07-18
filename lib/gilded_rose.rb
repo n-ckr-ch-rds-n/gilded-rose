@@ -13,22 +13,20 @@ class GildedRose
           decrease_quality_by(1, item) unless name_is?("Sulfuras, Hand of Ragnaros", item)
         end
       else
-        if quality_is_less_than?(50, item)
-          increase_quality_by(1, item)
-          if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-            if item.sell_in < 11
-              increase_quality_by(1, item) if quality_is_less_than?(50, item)
-            end
-            if item.sell_in < 6
-              increase_quality_by(1, item) if quality_is_less_than?(50, item)
-            end
+        increase_quality_by(1, item) if quality_is_less_than?(50, item)
+        if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+          if sell_in_is_less_than?(11, item)
+            increase_quality_by(1, item) if quality_is_less_than?(50, item)
+          end
+          if sell_in_is_less_than?(6, item)
+            increase_quality_by(1, item) if quality_is_less_than?(50, item)
           end
         end
       end
       unless name_is?("Sulfuras, Hand of Ragnaros", item)
-        item.sell_in = item.sell_in - 1
+        decrease_sell_in_by(1, item)
       end
-      if item.sell_in < 0
+      if sell_in_is_less_than?(0, item)
         unless name_is?("Aged Brie", item)
           unless name_is?("Backstage passes to a TAFKAL80ETC concert", item)
             if quality_is_greater_than?(0, item)
@@ -45,11 +43,15 @@ class GildedRose
   end
 
   def increase_quality_by(number, item)
-      item.quality += number
+    item.quality += number
   end
 
   def decrease_quality_by(number, item)
-      item.quality -= number
+    item.quality -= number
+  end
+
+  def decrease_sell_in_by(number, item)
+    item.sell_in -= number
   end
 
   def name_is?(name, item)
@@ -62,6 +64,10 @@ class GildedRose
 
   def quality_is_less_than?(number, item)
     item.quality < number
+  end
+
+  def sell_in_is_less_than?(number, item)
+    item.sell_in < number
   end
 
 end

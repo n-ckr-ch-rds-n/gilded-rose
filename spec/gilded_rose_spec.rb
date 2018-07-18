@@ -85,6 +85,13 @@ describe GildedRose do
     end
   end
 
+  describe '#decrease_sell_in_by' do
+    it 'decreases sell_in by given number' do
+      @gildedrose.decrease_sell_in_by(1, @smarties)
+      expect(@smarties.sell_in).to eq(4)
+    end
+  end
+
   describe '#name_is?' do
     it 'checks item name' do
       expect(@gildedrose.name_is?("Smarties", @smarties)).to eq true
@@ -100,6 +107,12 @@ describe GildedRose do
   describe '#quality_is_less_than?' do
     it 'checks if quality is less than a given threshold' do
       expect(@gildedrose.quality_is_less_than?(5, @smarties)).to eq false
+    end
+  end
+
+  describe '#sell_in_is_less_than?' do
+    it 'checks if sell_in is less than a given threshold' do
+      expect(@gildedrose.sell_in_is_less_than?(5, @smarties)).to eq false
     end
   end
 
