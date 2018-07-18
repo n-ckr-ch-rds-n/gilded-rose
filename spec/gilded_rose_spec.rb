@@ -162,4 +162,11 @@ describe GildedRose do
     end
   end
 
+  describe '#decrease_quality_for_out_of_date_items' do
+    it 'decreases quality if not backstage pass or brie' do
+      @gildedrose.decrease_quality_for_out_of_date_items(@smarties)
+      expect(@smarties.quality).to eq(19)
+    end
+  end
+
 end

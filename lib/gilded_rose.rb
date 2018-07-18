@@ -17,9 +17,7 @@ class GildedRose
       decrease_item_sell_in(item)
       if sell_in_is_less_than?(0, item)
         unless name_is?("Aged Brie", item)
-          unless name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-            decrease_item_quality(item)
-          end
+          decrease_quality_for_out_of_date_items(item)
           set_quality_to_zero_for_out_of_date_backstage_passes(item)
         else
           increase_item_quality(item)
@@ -28,10 +26,12 @@ class GildedRose
     end
   end
 
+  def decrease_quality_for_out_of_date_items(item)
+    decrease_item_quality(item) unless name_is?("Backstage passes to a TAFKAL80ETC concert", item)
+  end
+
   def set_quality_to_zero_for_out_of_date_backstage_passes(item)
-    if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
-      decrease_quality_by(item.quality, item)
-    end
+    decrease_quality_by(item.quality, item) if name_is?("Backstage passes to a TAFKAL80ETC concert", item)
   end
 
   def apply_extra_quality_increases_to_backstage_passes(item)
