@@ -87,7 +87,19 @@ describe GildedRose do
 
   describe '#name_is?' do
     it 'checks item name' do
-      expect(@gildedrose.name_is?(@smarties, "Smarties")).to eq true
+      expect(@gildedrose.name_is?("Smarties", @smarties)).to eq true
+    end
+  end
+
+  describe '#quality_is_greater_than?' do
+    it 'checks if quality is above a given threshold' do
+      expect(@gildedrose.quality_is_greater_than?(5, @smarties)).to eq true
+    end
+  end
+
+  describe '#quality_is_less_than?' do
+    it 'checks if quality is less than a given threshold' do
+      expect(@gildedrose.quality_is_less_than?(5, @smarties)).to eq false
     end
   end
 
