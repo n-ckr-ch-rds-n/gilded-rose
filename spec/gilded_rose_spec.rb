@@ -71,16 +71,16 @@ describe GildedRose do
 
   end
 
-  describe '#increase_quality' do
-    it 'increases quality by 1' do
-      @gildedrose.increase_quality(@smarties)
+  describe '#increase_quality_by' do
+    it 'increases quality by given number' do
+      @gildedrose.increase_quality_by(1, @smarties)
       expect(@smarties.quality).to eq(21)
     end
   end
 
-  describe '#decrease_quality' do
-    it 'decreases quality by 1' do
-      @gildedrose.decrease_quality(@smarties)
+  describe '#decrease_quality_by' do
+    it 'decreases quality by given number' do
+      @gildedrose.decrease_quality_by(1, @smarties)
       expect(@smarties.quality).to eq(19)
     end
   end
