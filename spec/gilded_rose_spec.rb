@@ -211,4 +211,20 @@ describe GildedRose do
 
   end
 
+  describe '#increase_quality_for_passes_ten_days_before_concert' do
+    it 'increases quality for backstage passes ten days before a concert' do
+      5.times { @gildedrose.update_quality }
+      @gildedrose.increase_quality_for_passes_ten_days_before_concert(@backstagepass)
+      expect(@backstagepass.quality).to eq(16)
+    end
+  end
+
+  describe '#increase_quality_for_passes_five_days_before_concert' do
+    it 'increases quality for backstage passes ten days before a concert' do
+      10.times { @gildedrose.update_quality }
+      @gildedrose.increase_quality_for_passes_five_days_before_concert(@backstagepass)
+      expect(@backstagepass.quality).to eq(26)
+    end
+  end
+
 end
