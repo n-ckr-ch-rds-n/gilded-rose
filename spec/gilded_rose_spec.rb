@@ -10,6 +10,8 @@ describe GildedRose do
     @sulfuras = Item.new("Sulfuras, Hand of Ragnaros", 10, 50)
     @backstagepass = Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 10)
 
+    @conjured_item = Item.new("Conjured Bread", 10, 30)
+
     @gildedrose = GildedRose.new([@smarties, @custard, @agedbrie, @agedbrie2, @sulfuras, @backstagepass])
   end
 
@@ -224,6 +226,27 @@ describe GildedRose do
       10.times { @gildedrose.update_quality }
       @gildedrose.increase_quality_for_passes_five_days_before_concert(@backstagepass)
       expect(@backstagepass.quality).to eq(26)
+    end
+  end
+
+  describe '#decrease_quality_if_not_aged_brie' do
+    it 'decreases quality for out of date items if not brie' do
+      @gildedrose.decrease_quality_if_not_aged_brie(@smarties)
+      expect(@smarties.quality).to eq(19)
+    end
+  end
+
+  describe '#increase_quality_for_aged_brie' do
+    it 'increases the quality of aged brie' do
+      @gildedrose.increase_quality_for_aged_brie(@agedbrie)
+      expect(@agedbrie.quality).to eq(31)
+    end
+  end
+
+  describe '#decrease_quality_for_conjured_items' do
+    it 'decreases quality if an item is conjured' do
+      @gildedrose.decrease_quality_for_conjured_items(@conjured_item)
+      expect(@conjured_item.quality).to eq(29)
     end
   end
 

@@ -15,6 +15,16 @@ class GildedRose
     end
   end
 
+  def decrease_quality_for_conjured_items(item)
+    if item_is_conjured?(item)
+      decrease_item_quality(item)
+    end
+  end
+
+  def item_is_conjured?(item)
+    item.name.start_with?("Conjured")
+  end
+
   def increase_quality_of_special_items(item)
     if name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
       increase_item_quality(item)
@@ -30,12 +40,21 @@ class GildedRose
 
   def manage_quality_for_out_of_date_items(item)
     if sell_in_is_less_than?(0, item)
-      unless name_is?("Aged Brie", item)
-        decrease_quality_for_out_of_date_items(item)
-        set_quality_to_zero_for_out_of_date_backstage_passes(item)
-      else
-        increase_item_quality(item)
-      end
+      decrease_quality_if_not_aged_brie(item)
+      increase_quality_for_aged_brie(item)
+    end
+  end
+
+  def increase_quality_for_aged_brie(item)
+    if name_is?("Aged Brie", item)
+      increase_item_quality(item)
+    end
+  end
+
+  def decrease_quality_if_not_aged_brie(item)
+    unless name_is?("Aged Brie", item)
+      decrease_quality_for_out_of_date_items(item)
+      set_quality_to_zero_for_out_of_date_backstage_passes(item)
     end
   end
 
