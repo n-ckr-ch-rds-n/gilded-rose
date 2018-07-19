@@ -185,15 +185,15 @@ describe GildedRose do
     end
   end
 
-  describe '#decrease_quality_of_normal_items' do
+  describe '#decrease_quality_of_normal_and_conjured_items' do
 
     it 'decreases the quality of normal items' do
-      @gildedrose.decrease_quality_of_normal_items(@smarties)
+      @gildedrose.decrease_quality_of_normal_and_conjured_items(@smarties)
       expect(@smarties.quality).to eq(19)
     end
 
     it 'does not decrease the quality of aged brie' do
-      @gildedrose.decrease_quality_of_normal_items(@agedbrie)
+      @gildedrose.decrease_quality_of_normal_and_conjured_items(@agedbrie)
       expect(@agedbrie.quality).to eq(30)
     end
 

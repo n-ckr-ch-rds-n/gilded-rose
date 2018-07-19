@@ -8,7 +8,7 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      decrease_quality_of_normal_items(item)
+      decrease_quality_of_normal_and_conjured_items(item)
       increase_quality_of_special_items(item)
       decrease_item_sell_in(item)
       manage_quality_for_out_of_date_items(item)
@@ -32,9 +32,10 @@ class GildedRose
     end
   end
 
-  def decrease_quality_of_normal_items(item)
+  def decrease_quality_of_normal_and_conjured_items(item)
     unless name_is?("Aged Brie", item) || name_is?("Backstage passes to a TAFKAL80ETC concert", item)
       decrease_item_quality(item)
+      decrease_quality_for_conjured_items(item)
     end
   end
 
